@@ -3,23 +3,23 @@ from tkinter import messagebox
 import random
 
 class window:
-    root=None
-    wordList=["hello","world","one","two","hey","apple"]
+    wordList=[]#["hello","world","one","two","hey","apple"]
     occuredList=[]
-    canvas=None
     lives=3
-    yesButton=None
-    noButton = None
-    wordBox=None
-    msgbox=None
-    buttoncanvas=None
     score=0
     def __init__(self):
+        self.initWords()
         self.root=tkinter.Tk()
         self.addCanvas()
         self.populate()
         self.root.mainloop()
 
+    def initWords(self):
+        wordfile=open('wordlist.txt','r')
+        wordlist=wordfile.read()
+        wordlist=wordlist.replace('\n','\t').split('\t')
+        print(wordlist)
+        self.wordList=random.sample(wordlist,20)
 
     def addCanvas(self):
         self.canvas=tkinter.Canvas(self.root,height=480,width=800)
